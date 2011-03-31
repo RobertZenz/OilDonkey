@@ -40,11 +40,22 @@ info.setAttribute("style", "\
 	\
 	padding: 5px 5px 5px 5px;\
 	opacity: 0.75;\
+	\
+	z-index: 999;\
 ");
 
 
 createItem(info, "Google Ads", unsafeWindow.google_ad_client);
 createItem(info, "Google Analytics", unsafeWindow.google_analytics_uacct);
+
+// Look for doubleclick-script-items
+var scriptItems = document.getElementsByTagName("script");
+for(var i = 0; i < scriptItems.length; i++) {
+	if(scriptItems[i].getAttribute("src") != null && scriptItems[i].getAttribute("src").indexOf("ad.doubleclick.net") >= 0) {
+		createItem(info, "Doubleclick Ads", "True");
+		break;
+	}
+}
 
 // Add the item to the document
 // only if we have information to show.
