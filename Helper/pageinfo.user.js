@@ -52,7 +52,7 @@ createItem(info, "Google Analytics", unsafeWindow.google_analytics_uacct);
 var scriptItems = document.getElementsByTagName("script");
 for(var i = 0; i < scriptItems.length; i++) {
 	if(scriptItems[i].getAttribute("src") != null && scriptItems[i].getAttribute("src").indexOf("ad.doubleclick.net") >= 0) {
-		createItem(info, "Doubleclick Ads", "True");
+		createItem(info, "Doubleclick Ads", scriptItems[i].getAttribute("src").split("/")[4]);
 		break;
 	}
 }
