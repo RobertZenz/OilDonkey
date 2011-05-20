@@ -48,12 +48,17 @@ info.setAttribute("style", "\
 createItem(info, "Google Ads", unsafeWindow.google_ad_client);
 createItem(info, "Google Analytics", unsafeWindow.google_analytics_uacct);
 
-// Look for doubleclick-script-items
+// Look for script-items
 var scriptItems = document.getElementsByTagName("script");
 for(var i = 0; i < scriptItems.length; i++) {
-	if(scriptItems[i].getAttribute("src") != null && scriptItems[i].getAttribute("src").indexOf("ad.doubleclick.net") >= 0) {
-		createItem(info, "Doubleclick Ads", scriptItems[i].getAttribute("src").split("/")[4]);
-		break;
+	var src = scriptItems[i].getAttribute("src");
+	if(src != null) {
+		if(src.indexOf("ad.doubleclick.net") >= 0) {
+			createItem(info, "Doubleclick Ads", scriptItems[i].getAttribute("src").split("/")[4]);
+		}
+		if(src.indexOf("amazon/ads.js") >= 0) {
+			createItem(info, "Amazon Ads", "");
+		}
 	}
 }
 
