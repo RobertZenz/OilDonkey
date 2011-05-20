@@ -11,9 +11,12 @@
  * License: Public Domain
  */
  
+var ads = new Array();
 
 function createItem(parent, name, value) {
-	if(value != null) {
+	if(value != null && ads.indexOf(name + value) == -1) {
+		ads.push(name + value);
+		
 		var item = document.createElement("li");
 		item.innerHTML = "<strong>" + name + ":</strong> " + value;
 		parent.appendChild(item);
@@ -54,7 +57,7 @@ for(var i = 0; i < scriptItems.length; i++) {
 	var src = scriptItems[i].getAttribute("src");
 	if(src != null) {
 		if(src.indexOf("ad.doubleclick.net") >= 0) {
-			createItem(info, "Doubleclick Ads", scriptItems[i].getAttribute("src").split("/")[4]);
+			createItem(info, "Doubleclick Ads", src.split("/")[4]);
 		}
 		if(src.indexOf("amazon/ads.js") >= 0) {
 			createItem(info, "Amazon Ads", "");
