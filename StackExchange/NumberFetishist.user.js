@@ -9,6 +9,8 @@
 /*
  * Written by Robert 'Bobby' Zenz
  * Public Domain or CC-Zero
+ *
+ * Appends the ids of questions and users to the links.
  */
 
 links = document.getElementsByTagName("a");
