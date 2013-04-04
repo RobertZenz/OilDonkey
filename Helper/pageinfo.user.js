@@ -11,10 +11,12 @@
  * License: Public Domain
  */
  
-var ads = new Array();
+var ads = [];
 
 function createItem(parent, name, value) {
-	if(value != null && ads.indexOf(name + value) == -1) {
+	"use strict";
+
+	if(value !== null && ads.indexOf(name + value) === -1) {
 		ads.push(name + value);
 		
 		var item = document.createElement("li");
@@ -26,26 +28,19 @@ function createItem(parent, name, value) {
 
 var info = document.createElement("ul");
 info.setAttribute("id", "nameList");
-info.setAttribute("style", "\
-	background-color: #fce94f;\
-	color: #2e3436;\
-	border: 2px solid #c4a000;\
-	font-size: 0.9em;\
-	\
-	position: fixed;\
-	\
-	bottom: 2px;\
-	right: 2px;\
-	\
-	\
-	text-align: left;\
-	list-style-type: none;\
-	\
-	padding: 5px 5px 5px 5px;\
-	opacity: 0.75;\
-	\
-	z-index: 999;\
-");
+info.setAttribute("style", "" + 
+	"background-color: #fce94f;" +
+	"color: #2e3436;" +
+	"border: 2px solid #c4a000;" +
+	"font-size: 0.9em;" +
+	"position: fixed;" +
+	"bottom: 2px;" +
+	"right: 2px;" +
+	"text-align: left;" +
+	"list-style-type: none;" +
+	"padding: 5px 5px 5px 5px;" +
+	"opacity: 0.75;" +
+	"z-index: 999;");
 
 
 createItem(info, "Google Ads", unsafeWindow.google_ad_client);
@@ -55,7 +50,7 @@ createItem(info, "Google Analytics", unsafeWindow.google_analytics_uacct);
 var scriptItems = document.getElementsByTagName("script");
 for(var i = 0; i < scriptItems.length; i++) {
 	var src = scriptItems[i].getAttribute("src");
-	if(src != null) {
+	if(src !== null) {
 		if(src.indexOf("ad.doubleclick.net") >= 0) {
 			createItem(info, "Doubleclick Ads", src.split("/")[4]);
 		}
